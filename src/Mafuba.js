@@ -57,7 +57,9 @@ export default class Mafuba {
     this.data = Object.assign({}, this.data, data)
 
     this.refs.forEach(component => {
-      component.forceUpdate()
+      if (component.updater.isMounted(component)) {
+        component.forceUpdate()
+      }
     })
 
     Seal(this.data)
